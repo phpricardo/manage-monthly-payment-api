@@ -5,9 +5,9 @@ module Api
 
       # GET /students
       def index
-        @students = Student.all
+        @students = Student.all.page(params[:page]).per(params[:count])
 
-        render json: @students
+        render json: { page: params[:page], items: @students }
       end
 
       # GET /students/1
@@ -20,7 +20,7 @@ module Api
         @student = Student.new(student_params)
 
         if @student.save
-          render json: @student, only: [:id], status: :created
+          render json: { id: @student.id }, status: :created
         else
           render json: @student.errors, status: :unprocessable_entity
         end
