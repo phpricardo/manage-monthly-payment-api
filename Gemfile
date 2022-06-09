@@ -39,6 +39,10 @@ gem "bootsnap", require: false
 # This gem does some CPF/CNPJ magic. It allows you to create, validate and format CPF/CNPJ, even through the command-line.
 gem "cpf_cnpj"
 
+gem "kaminari"
+
+gem 'active_model_serializers'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
