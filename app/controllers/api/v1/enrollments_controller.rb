@@ -22,14 +22,7 @@ module Api
         amount_bill = @enrollment.amount / @enrollment.installments 
 
         if @enrollment.save
-
-          until @enrollment.installments < 0
-            @enrollment.bills_attributes=[{amount: amount_bill}]
-            @enrollment.save
-            @enrollment.installments -= 1
-          end
-
-          render json: @enrollment, status: :created
+          render json: @enrollment.as_json(except: [:created_at, :updated_at], include: { bills: { except: [:created_at, :updated_at, :enrollment_id] }}), status: :created
         else
           render json: @enrollment.errors, status: :unprocessable_entity
         end
