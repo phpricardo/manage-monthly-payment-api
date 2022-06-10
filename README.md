@@ -1,24 +1,44 @@
-# README
+# Mange Monthly Payment - API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Após clonar o projeto:
 
-Things you may want to cover:
+  * Alterar o usuário e senha do `database.yml`
+  * Rodar o `bundle install`
+  * Rodar as migration `rails db:create db:migrate`
+  * Iniciar o servidor `rails s`
 
-* Ruby version
+Logo, poderá acessar:
 
-* System dependencies
+GET `http://localhost:3000/api/v1/students` Lista os Alunos
 
-* Configuration
+Exemplo de paramêtros de entrada:
+```sh
+{
+  "page": 1,
+  "count": 2
+}
+```
 
-* Database creation
+POST `http://localhost:3000/api/v1/students` Cadastra um Aluno
 
-* Database initialization
+ex:
+```sh
+{
+  "name": "Novo aluno",
+  "cpf": "490.314.165-92",
+  "birthdate": "23/10/1996",
+  "payment_method": "boleto"
+}
+```
 
-* How to run the test suite
+POST ` http://localhost:3000/api/v1/enrollments` Realiza a Matrícula
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+ex:
+```sh
+{
+  "amount": 9000,
+  "installments": 3,
+  "due_day": 5,
+  "student_id": 45
+}
+```
