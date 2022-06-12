@@ -1,13 +1,16 @@
 module Api
   module V1
     class EnrollmentsController < ApplicationController
+      include ActionController::HttpAuthentication::Basic::ControllerMethods
+      http_basic_authenticate_with name: "admin_ops", password: "billing", only: :create
+
       before_action :set_enrollment, only: %i[ show update destroy ]
 
       # GET /enrollments
       def index
-        @enrollments = Enrollment.all
+        @enrollments = Enrollment.all.page(params[:page]).per(params[:count])
 
-        render json: @enrollments
+        render json: { page: params[:page], items: @enrollments.as_json(except: [:created_at, :updated_at], include: { bills: { except: [:created_at, :updated_at, :enrollment_id] }}) }
       end
 
       # GET /enrollments/1
@@ -18,8 +21,6 @@ module Api
       # POST /enrollments
       def create
         @enrollment = Enrollment.new(enrollment_params)
-
-        amount_bill = @enrollment.amount / @enrollment.installments 
 
         if @enrollment.save
           render json: @enrollment.as_json(except: [:created_at, :updated_at], include: { bills: { except: [:created_at, :updated_at, :enrollment_id] }}), status: :created
