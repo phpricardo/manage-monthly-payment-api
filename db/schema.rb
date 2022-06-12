@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_08_012450) do
   create_table "bills", force: :cascade do |t|
     t.integer "amount"
     t.date "due_date"
-    t.string "status"
+    t.string "status", default: "open"
     t.bigint "enrollment_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
