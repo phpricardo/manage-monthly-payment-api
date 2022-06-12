@@ -7,7 +7,7 @@ module Api
       def index
         @students = Student.all.page(params[:page]).per(params[:count])
 
-        render json: { page: params[:page], items: @students }
+        render json: { page: params[:page], items: @students }, except: [:created_at, :updated_at]
       end
 
       # GET /students/1
