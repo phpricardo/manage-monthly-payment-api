@@ -41,11 +41,15 @@ gem "cpf_cnpj"
 
 gem "kaminari"
 
-gem 'active_model_serializers'
+gem "active_model_serializers"
+
+gem "rails-i18n"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "faker", :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  gem "cpf_faker" # Gera cpf validos
 end
 
 group :development do
