@@ -30,7 +30,7 @@ class Enrollment < ApplicationRecord
       day = self.due_day
       month = Date.today.month + i
 
-      # Regra para restar o mês quando chegar a maior que 12, cabe refator!
+      # Regra para resetar o mês quando chegar a maior que 12, cabe refator!
       if month > 12 
         year = Date.today.year.next
         month = i - Date.today.month
@@ -49,14 +49,6 @@ class Enrollment < ApplicationRecord
       Bill.create!(amount: bill_amount, status: "open", due_date: payment_date, enrollment_id: self.id)
     end
   end
-
-  # def as_json(options={})
-  #   obj = super(options)
-  #   obj["bills"].each do |x| 
-  #     obj[:bills] = "123"
-  #   end
-  #   obj
-  # end
 
   private
 
