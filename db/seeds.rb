@@ -1,3 +1,4 @@
+puts "Cadastrando Students..."
 10.times do |i|
   Student.create!(
     name: Faker::Name.unique.name,
@@ -6,3 +7,4 @@
     payment_method: ['Boleto', 'Cartão de Crédito'].sample
   )
 end
+puts "Students cadastrados."
